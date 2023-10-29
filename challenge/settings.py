@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 from typing import Optional
 
+from challenge.apps.core.apps import CoreConfig
+from challenge.apps.users.apps import UsersConfig
 from challenge.support.django_helpers import eval_env_as_boolean
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,9 +30,14 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
+LOCAL_APPS = [
+    UsersConfig.name,
+    CoreConfig.name,
+]
+
 THIRD_PARTY = ["rest_framework"]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

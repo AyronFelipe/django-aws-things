@@ -16,3 +16,14 @@ class StandardModelMixin(BaseModelMixin):
 
     class Meta:
         abstract = True
+
+
+class Message(StandardModelMixin):
+    class StatusChoice(models.IntegerChoices):
+        FAILED = -1
+        SCHEDULE = 1
+        SUCCEEDED = 2
+
+    destination = models.CharField(max_length=255)
+    body = models.JSONField()
+    status = models.IntegerField(choices=StatusChoice.choices, default=StatusChoice.SCHEDULE)

@@ -6,7 +6,7 @@ from challenge.apps.core.models import StandardModelMixin
 from challenge.support.decorators import send
 
 
-@send(queue_name="user-data-destination")
+@send(queue_name="UserDataDestination")
 class UserData(StandardModelMixin):
     name = models.CharField(max_length=100, null=False, blank=False, verbose_name="Name of User")
     email = models.EmailField(verbose_name="E-mail of user", null=False, blank=False)

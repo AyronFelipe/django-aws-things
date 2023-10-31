@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: aws
+
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+
+Resources:
+  CalculateDateOfBirthSQS:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "UserDataDestination"
+
+  CalculateDateOfBirthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: apps/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        CalculateDateOfBirthEvent:
+          Type: SQS
+          Properties:
+            Queue:
+              Fn::GetAtt:
+                - CalculateDateOfBirthSQS
+                - Arn

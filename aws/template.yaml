@@ -13,10 +13,19 @@ Resources:
     Properties:
       QueueName: "UserDataDestination"
 
+  CalculateDateOfBirthSNS:
+    Type: "AWS::SNS::Topic"
+
   CalculateDateOfBirthFunction:
-    Type: AWS::Serverless::Function
+    Type: "AWS::Serverless::Function"
     Properties:
       CodeUri: apps/
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref CalculateDateOfBirthSNS
+      Policies:
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt CalculateDateOfBirthSNS.TopicName
       Handler: app.lambda_handler
       Runtime: python3.9
       Architectures:
@@ -29,3 +38,12 @@ Resources:
               Fn::GetAtt:
                 - CalculateDateOfBirthSQS
                 - Arn
+
+Outputs:
+  MyLambdaFunctionArn:
+    Description: Lambda Function ARN
+    Value: !GetAtt CalculateDateOfBirthFunction.Arn
+
+  CalculateDateOfBirthSNSArn:
+    Description: SNS Topic ARN
+    Value: !Ref CalculateDateOfBirthSNS

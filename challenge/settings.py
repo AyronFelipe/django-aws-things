@@ -35,7 +35,7 @@ LOCAL_APPS = [
     CoreConfig.name,
 ]
 
-THIRD_PARTY = ["rest_framework"]
+THIRD_PARTY = ["rest_framework", "drf_spectacular"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY + LOCAL_APPS
 
@@ -111,3 +111,13 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LAMBDA_FUNCTION_CALCULATE_DATE_OF_BIRTH_FUNCTION = os.getenv("LAMBDA_FUNCTION_CALCULATE_DATE_OF_BIRTH_FUNCTION")
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Challenge - API",
+    "DESCRIPTION": "Just a project to study things.",
+    "VERSION": "1.0.0",
+}

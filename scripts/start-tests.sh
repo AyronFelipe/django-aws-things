@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+COVER_PROJECT_PATH=.
+TESTS_PROJECT_PATH=tests
+REPORTS_FOLDER_PATH=tests-reports
+
+PYTHONPATH=. pytest $TESTS_PROJECT_PATH -vv

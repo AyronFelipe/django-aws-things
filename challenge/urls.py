@@ -8,8 +8,12 @@ from challenge.apps.users.api.v1.views import UserDataRetrieveUpdateDestroyAPIVi
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/users/", UserDataListCreateAPIView.as_view(), name="Users"),
-    path("api/v1/users/<str:pk>/", UserDataRetrieveUpdateDestroyAPIView.as_view(), name="Users"),
-    path("api/v1/messages/", MessageListCreateAPIView.as_view(), name="messages"),
-    path("api/v1/messages/<str:pk>/", MessageRetrieveUpdateDestroyAPIView.as_view(), name="messages"),
+    path("api/v1/users/", UserDataListCreateAPIView.as_view(), name="users-create-list"),
+    path("api/v1/users/<str:pk>/", UserDataRetrieveUpdateDestroyAPIView.as_view(), name="users-retrieve-update-delete"),
+    path("api/v1/messages/", MessageListCreateAPIView.as_view(), name="messages-create-list"),
+    path(
+        "api/v1/messages/<str:pk>/",
+        MessageRetrieveUpdateDestroyAPIView.as_view(),
+        name="messages-retrieve-update-delete",
+    ),
 ]

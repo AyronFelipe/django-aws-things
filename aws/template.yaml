@@ -38,6 +38,7 @@ Resources:
               Fn::GetAtt:
                 - CalculateDateOfBirthSQS
                 - Arn
+      Timeout: 10
 
 Outputs:
   MyLambdaFunctionArn:

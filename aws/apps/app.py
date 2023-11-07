@@ -1,4 +1,5 @@
 import os
+import time
 
 from datetime import datetime
 
@@ -21,6 +22,8 @@ def lambda_handler(event, context):
     int or bool: If the event triggers age calculation, it returns the calculated birth year (int).
     If the event triggers a secondary action, it returns a boolean value (bool) indicating success.
     """
+    time.sleep(5)
+
     result = None
     if "Records" in event:
         result = publish_to_sns()
